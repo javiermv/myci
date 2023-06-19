@@ -210,7 +210,7 @@ def leer_listado_incoming(reportar_sin_pasaporte : bool = True) -> dict :
         print('Se recordó incoming/listado.php.')
         return _listado_incoming_recordado
 
-#    !pip install xmltodict
+#    ! pip install xmltodict
 
     from xml.dom import minidom
     import requests
