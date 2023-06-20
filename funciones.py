@@ -171,7 +171,10 @@ def leer_ordenes_SIU3() -> dict :
         # - SIU2 no tiene del todo definidos los Estados
         # PROVISORIO...
         # Se agrega
-        estado = row[encabezado.index('Estado')]
+        # Por ahora, la generación de Ordenes no está definiendo el Estado, por
+        # lo que row['Estado'] devuelve Index-out-of-bound.
+        idx_estado = encabezado.index('Estado')
+        estado = row[idx_estado] if idx_estado < len(row) else ''
         orden['Estado'] = estado
 
         pasaporte = row[encabezado.index('Pasaporte')]
