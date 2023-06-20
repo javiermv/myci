@@ -143,7 +143,7 @@ def leer_ordenes_SIU3() -> dict :
         clave pasaporte
         valor [ orden ]
     """
-    ordenes_SIU3 = leer_google_spreadsheet(id_2023C1_ordenes_de_inscripcion, 'SIU3')
+    ordenes_SIU3 = leer_google_spreadsheet(id_ordenes_de_inscripcion, 'SIU3')
     result = { }
     encabezado = ordenes_SIU3[0]
     atributos_eleccion = ['Escuela', 'Codigo', 'Materia', 'Horario', 'Prioridad']
@@ -189,7 +189,7 @@ def leer_ordenes_SIU3() -> dict :
     return result
 ############################################################
 def leer_ordenes_SIU2(sheet_name : str) -> dict :
-    ordenes_SIU2 = leer_google_spreadsheet(id_2023C1_ordenes_de_inscripcion, sheet_name)
+    ordenes_SIU2 = leer_google_spreadsheet(id_ordenes_de_inscripcion, sheet_name)
     # atributos_eleccion = ['Escuela', 'Codigo', 'Materia', 'Horario', 'Prioridad'] # SIU3
     # atributos_eleccion = ['Materia', 'Horario', 'Prioridad'] # SIU2 original
     atributos_eleccion = ['Materia', 'Horario', 'Prioridad', 'Estado'] # SIU2 emparchado
