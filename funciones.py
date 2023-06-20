@@ -281,3 +281,37 @@ def leer_listado_incoming(reportar_sin_pasaporte : bool = True) -> dict :
     # print('Por ejemplo: "incoming[1234] == { Apellido : Messi, Nombre : Lionel, Pais : Argentina }".')
 
     return result
+
+############################################################
+    
+def find_changes(new_row, old_row) -> dict :
+    """busca las diferencias entre dos versiones de una fila
+    
+    Resultado
+    ---------
+    dict: 
+    clave posición donde difieren las filas [i]
+    Valor es una dupla viejo valor y nuevo valor para fila [i]
+    """
+    if len(new_row) > len(old_row):
+        raise ValueError("Se asume que la vieja fila puede tener más columnas pero no menos.")
+
+    result = {} # dict vacio
+    for i in range(len(new_row)):
+        if new_row[i] != old_row[i]:
+            result[i] = (old_row[i], new_row[i])
+
+    return result # si todos son iguales devuelve un dict vacio sino te da info combinada de los cambios en cada posición
+
+def explain_changes(header:list, changes:dict) -> list :
+    """genera una explicación a partir de los cambios detectados en find_change
+    
+    Resultado
+    ---------
+    Cada elemento indica el encabezado de la posición del cambio y muestra el valor viejo y el nuevo
+    
+    """
+    result = []
+    for i, change in changes.items() :
+        result.append(header[i] + ': ' + change[0] + ' -> ' + change[1])
+    return result
