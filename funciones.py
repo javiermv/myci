@@ -60,7 +60,7 @@ def guardar_dict_en_google_spreadsheet(sheets : dict, doc_id : str) :
     return
 
 # Más adelante, esta función podría reutilizar la de arriba
-def guardar_en_google_spreadsheet(rows : list, doc_id : str, sheet_name = None) :
+def guardar_list_en_google_spreadsheet(rows : list, doc_id : str, sheet_name = None) :
     import gspread
     from google.auth import default
     creds, _ = default()
