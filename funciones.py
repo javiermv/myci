@@ -46,13 +46,16 @@ def leer_google_spreadsheet(doc_id : str, sheet_name : str = None, forget_previo
     return result
 ############################################################
 def guardar_dict_en_google_spreadsheet(sheets : dict, doc_id : str) :
+    """
+    param sheets: las claves son los nombres de las hojas; los valores son listas de filas.
+    """
     import gspread
     from google.auth import default
     creds, _ = default()
     gc = gspread.authorize(creds)
     # ver https://docs.gspread.org/en/v5.7.0/user-guide.html#opening-a-spreadsheet
     workbook = gc.open_by_key(doc_id)
-    for name, rows in dict.items() :
+    for name, rows in sheets.items() :
         sheet = workbook.sheet1 if name == None else workbook.worksheet(name)
         sheet.update(rows)
         print('Se escribieron', len(rows), 'filas en la hoja', sheet.title, 'de', workbook.title)
