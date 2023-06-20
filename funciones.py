@@ -183,7 +183,7 @@ def leer_ordenes_SIU3() -> dict :
         # NOTAR la 'a' en Materia
 
         if estado == '' :
-            print("¡CUIDADO! En la planilla SIU3, el Estado == '' se asume " +
+            print('¡CUIDADO! En la planilla SIU3, el Estado vacío ("") se asume ' +
                   "'Inscripto' para el pasaporte", pasaporte, "en la orden", orden)
 
         if not pasaporte in result :
