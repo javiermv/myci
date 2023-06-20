@@ -29,6 +29,7 @@ def leer_google_spreadsheet(doc_id : str, sheet_name : str = None, forget_previo
     from google.auth import default
     creds, _ = default()
     gc = gspread.authorize(creds)
+    # ver https://docs.gspread.org/en/v5.7.0/user-guide.html#opening-a-spreadsheet
     workbook = gc.open_by_key(doc_id)
     sheet = workbook.sheet1
     if sheet_name != None :
@@ -43,15 +44,28 @@ def leer_google_spreadsheet(doc_id : str, sheet_name : str = None, forget_previo
     _spreadsheets_recordados[(doc_id, sheet_name)] = (workbook.title, sheet.title, result)
     print('Se leyó la hoja', sheet.title, 'de', workbook.title)
     return result
-    
 ############################################################
+def guardar_en_google_spreadsheet(sheets : dict, doc_id : str) :
+    import gspread
+    from google.auth import default
+    creds, _ = default()
+    gc = gspread.authorize(creds)
+    # ver https://docs.gspread.org/en/v5.7.0/user-guide.html#opening-a-spreadsheet
+    workbook = gc.open_by_key(doc_id)
+    for name, rows in dict.items() :
+        sheet = workbook.sheet1 if name == None else workbook.worksheet(name)
+        sheet.update(rows)
+        print('Se escribieron', len(rows), 'filas en la hoja', sheet.title, 'de', workbook.title)
+        _spreadsheets_recordados[(doc_id, name)] = (workbook.title, sheet.title, rows)
+    return
 
+# Más adelante, esta función podría reutilizar la de arriba
 def guardar_en_google_spreadsheet(rows : list, doc_id : str, sheet_name = None) :
     import gspread
     from google.auth import default
     creds, _ = default()
     gc = gspread.authorize(creds)
-
+    # ver https://docs.gspread.org/en/v5.7.0/user-guide.html#opening-a-spreadsheet
     workbook = gc.open_by_key(doc_id)
     sheet = workbook.sheet1
     if sheet_name != None :
