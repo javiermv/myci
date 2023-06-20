@@ -43,6 +43,25 @@ def leer_google_spreadsheet(doc_id : str, sheet_name : str = None, forget_previo
     _spreadsheets_recordados[(doc_id, sheet_name)] = (workbook.title, sheet.title, result)
     print('Se leyó la hoja', sheet.title, 'de', workbook.title)
     return result
+    
+############################################################
+
+def guardar_en_google_spreadsheet(rows : list, doc_id : str, sheet_name = None) :
+    import gspread
+    from google.auth import default
+    creds, _ = default()
+    gc = gspread.authorize(creds)
+
+    workbook = gc.open_by_key(doc_id)
+    sheet = workbook.sheet1
+    if sheet_name != None :
+        sheet = workbook.worksheet(sheet_name)
+
+    sheet.update(rows)
+    print('Se escribieron', len(rows), 'filas en la hoja', sheet.title, 'de', workbook.title)
+    _spreadsheets_recordados[(doc_id, sheet_name)] = (workbook.title, sheet.title, rows)
+    return
+
 ############################################################
 def leer_requerimientos() -> dict:
     """ Lectura de la planilla de Requerimientos de inscripción.
