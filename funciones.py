@@ -45,7 +45,7 @@ def leer_google_spreadsheet(doc_id : str, sheet_name : str = None, forget_previo
     print('Se leyó la hoja', sheet.title, 'de', workbook.title)
     return result
 ############################################################
-def guardar_en_google_spreadsheet(sheets : dict, doc_id : str) :
+def guardar_dict_en_google_spreadsheet(sheets : dict, doc_id : str) :
     import gspread
     from google.auth import default
     creds, _ = default()
