@@ -1,6 +1,6 @@
 
 _spreadsheets_recordados = { }
-def leer_google_spreadsheet(doc_id : str, sheet_name : str = None) -> list :
+def leer_google_spreadsheet(doc_id : str, sheet_name : str = None, forget_previous : bool = False) -> list :
     """Lectura de hoja en Google-Spreadsheet.
     
     Parámetros
@@ -9,6 +9,8 @@ def leer_google_spreadsheet(doc_id : str, sheet_name : str = None) -> list :
         Código identificador del documento en Google-Spreadsheet.
     sheet_name : str, opcional
         Nombre de la hoja a leer (si no se especifica se lee la 1ra hoja).
+    forget_previous : bool, opcional
+        Deshabilita el 'recuerdo' de una lectura previa, si existe.
 
     Resultado
     -------
@@ -16,7 +18,7 @@ def leer_google_spreadsheet(doc_id : str, sheet_name : str = None) -> list :
         Una lista con todas las filas de la hoja seleccionada. Las filas son, a su vez, listas de strings.
     """
 
-    if (doc_id, sheet_name) in _spreadsheets_recordados :
+    if not forget_previous and (doc_id, sheet_name) in _spreadsheets_recordados :
         (book_title, sheet_title, content) = _spreadsheets_recordados[(doc_id, sheet_name)]
         print('Se recordó el contenido de la hoja', sheet_title, 'de', book_title)
         return content
