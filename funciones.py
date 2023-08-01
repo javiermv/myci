@@ -107,7 +107,7 @@ def leer_requerimientos() -> dict:
     # # To check the existence of a global variable:
     # # if 'myVar' in globals(): ...
 
-    requerimientos = leer_google_spreadsheet(id_requerimientos_de_inscripcion_manual)
+    requerimientos = leer_google_spreadsheet(id_requerimientos_de_inscripcion)
 
     index = { }
     for i, column in enumerate(requerimientos[0]) : # encabezado
