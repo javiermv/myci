@@ -146,7 +146,7 @@ def leer_ordenes_SIU3() -> dict :
     ordenes_SIU3 = leer_google_spreadsheet(id_ordenes_de_inscripcion, 'SIU3')
     result = { }
     encabezado = ordenes_SIU3[0]
-    atributos_eleccion = ['Escuela', 'Codigo', 'Materia', 'Horario', 'Prioridad']
+    atributos_eleccion = ['Escuela', 'Codigo', 'Materia', 'Horario', 'Prioridad','Decision']
     for row in ordenes_SIU3[1:] : # saltea encabezado
         orden = { }
         #print('row', row)
